@@ -8,7 +8,17 @@ animation = true or false
 
 ##### Example
 
-    <oddselect-element></oddselect-element>
+    <oddselect-element 
+    itemId="one" // Unique ID for element 
+    image="http://placehold.it/320x480" // Image of product to be displayed
+    exported="true", // Exported / Shipped / Soldout 
+    selected="false", // Chosen in the current session
+    author="Author Name / Designer Name / Brand Name" 
+    product="Product Name and title" 
+    price="650" // Price of product 
+    currency="$" // Currency symbol for product
+    info="Shipped from Lawrence, Kansas" // Additional information for each product
+    ></oddselect-element>
 
 @element oddselect-element
 @blurb Element to have multiple selectable elements from a grid 
@@ -23,9 +33,12 @@ animation = true or false
 
     <content></content>
     <section class="grid {{toggle}}">
-      <label for="{{itemId}}">
+      <label for="{{itemId}}" on-click="{{setSelected}}">
         <input type="checkbox" id="{{itemId}}" class="select" checked="{{toggle}}" />
         <img src="{{image}}" alt="">
+        <template bind if="{{ exported }}">
+          <div class="exported"></div>
+        </template>
         <div class="details">
           <span>{{author}}</span>
           <span>{{product}}</span>
@@ -47,39 +60,72 @@ animation = true or false
        */
 
       /**
-       * The `notitle` attribute does not yet have a purpose.
-       * 
-       * @attribute notitle
-       * @type string
+       * Dynamic attribute changes based on whether the current item is selected or not
+       * @attribute selected
+       * @type boolean
        */
-      notitle: '',
       
       selected: false,
       
+      /**
+       * Represents whether this product has already been exported / shipped etc
+       * @attribute exported
+       * @type boolean
+       */
       exported: false, 
 
-      author: "",
-      product: "",
-      price: "",
-      info: "", 
+      /**
+       * Brand name, author, designer name
+       * @attribute author
+       * @type string
+       */
+      author: "Lorem",
+
+      /**
+       * Title of product
+       * @attribute product
+       * @type string
+       */
+      product: "Lorem",
+
+      /**
+       * Quantity value of item price 
+       * @attribute price
+       * @type number
+       */
+      price: "123",
+      
+      /**
+       * Additional information for product eg: Shipped from
+       * @attribute info
+       * @type string
+       */
+
+      info: "Lorem Ipsum", 
+      
+      /**
+       * Currency symbol for product 
+       * @attribute currency
+       * @type string 
+       */
+      
       currency: "$",
 
       ready: function() {
       },
 
       /**
-       * The `task` method does no work at this time.
+       * The `setSelected` method sets the `selected` attribute to `true` based on user selection. You can poll for all objects with value set as true to programmatically get a list of selected items. 
        * 
-       * @method task
-       * @return {Object} Returns undefined.
-       * @param {String} dummy Serves no purpose today.
+       * @method setSelected
+       * @return {Object} Returns true.
+       * @param {event, detail, sender} .
        */
-      task: function(dummy) {
-      },
 
-      setActive: function() {
-        document.getElementById("grid").setAttribute("class","selected");
-        console.log("Set active");
+      setSelected: function (event, detail, sender) {
+        if (toggle) {
+          sender.setAttribute("selected", true);
+        }
       }
 
     });
