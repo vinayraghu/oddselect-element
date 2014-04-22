@@ -1,0 +1,89 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element to have multiple selectable options from a grid 
+Includes an image, some details and a checkbox
+attributes selected = true or false
+animation = true or false
+
+##### Example
+
+    <oddselect-element></oddselect-element>
+
+@element oddselect-element
+@blurb Element to have multiple selectable elements from a grid 
+@status alpha
+@url rvinay88.github.io
+-->
+<polymer-element name="oddselect-element" attributes="currency author product price info selected exported itemId image">
+
+  <template>
+
+    <link href="oddselect-element.css" rel="stylesheet" />
+
+    <content></content>
+    <section class="grid" id="grid">
+      <label for="{{itemId}}">
+        <input type="checkbox" id="{{itemId}}" class="select" checked="{{toggle}}" />
+        <img src="{{image}}" alt="">
+        <div class="details">
+          <span>{{author}}</span>
+          <span>{{product}}</span>
+          <span>{{currency}}{{price}}</span>
+          <span>{{info}}</span> 
+        </div>
+      </label>
+    </section>
+  </template>
+
+  <script>
+
+    Polymer({
+      /**
+       * The `noevent` event is not actually fired from here,
+       * we document it as an example of documenting events.
+       * 
+       * @event noevent
+       */
+
+      /**
+       * The `notitle` attribute does not yet have a purpose.
+       * 
+       * @attribute notitle
+       * @type string
+       */
+      notitle: '',
+      
+      selected: false,
+      
+      exported: false, 
+
+      author: "",
+      product: "",
+      price: "",
+      info: "", 
+      currency: "$",
+
+      ready: function() {
+      },
+
+      /**
+       * The `task` method does no work at this time.
+       * 
+       * @method task
+       * @return {Object} Returns undefined.
+       * @param {String} dummy Serves no purpose today.
+       */
+      task: function(dummy) {
+      },
+
+      setActive: function() {
+        document.getElementById("grid").setAttribute("class","selected");
+        console.log("Set active");
+      }
+
+    });
+
+  </script>
+
+</polymer-element>
