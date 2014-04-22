@@ -27,7 +27,7 @@
   right: 10px;
 }
 
-.selected {
+.grid.true {
   background: #bbb;
 }
 
@@ -39,7 +39,7 @@
   font-size: 14px;
   text-align: left;
   line-height: 1.5;
-  width: 200px;
+  width: 180px;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
